@@ -119,6 +119,7 @@ Schemas.Book = new SimpleSchema({
         optional: true
     },
     chapters :{
-        type : [Schemas.Chapter]
+        type : [Schemas.Chapter],
+        minCount : 1
     }
 });
