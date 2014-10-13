@@ -12,7 +12,8 @@ accounts-base
 accounts-password
 mrt:iron-router-progress
 aldeed:collection2
-aldeed:autoform
 alanning:roles
 gfk:notifications
+aldeed:autoform
+nxcong:iron-router-active
 

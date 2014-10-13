@@ -1,7 +1,7 @@
-Books = new Meteor.Collection('books');
-Publishers = new Meteor.Collection('publishers');
-People = new Meteor.Collection('people');
-Chapters = new Meteor.Collection('chapters');
+Books = new Mongo.Collection('books');
+Publishers = new Mongo.Collection('publishers');
+People = new Mongo.Collection('people');
+Chapters = new Mongo.Collection('chapters');
 
 var Schemas = {};
 
