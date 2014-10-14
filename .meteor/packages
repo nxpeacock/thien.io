@@ -16,4 +16,7 @@ alanning:roles
 gfk:notifications
 aldeed:autoform
 nxcong:iron-router-active
-
+cfs:standard-packages
+cfs:filesystem
+cfs:gridfs
+cfs:ui

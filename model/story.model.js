@@ -17,7 +17,7 @@ Schemas.Person = new SimpleSchema({
         label: 'Tên',
         max: 200
     },
-    description: {
+    summary: {
         type: String,
         label: 'Lược sử',
         max: 500,
@@ -30,7 +30,8 @@ Schemas.Person = new SimpleSchema({
     },
     avatar: {
         type: String,
-        label: 'Ảnh đại diện'
+        label: 'Ảnh đại diện',
+        optional : true
     },
     isAuthor: {
         type: Boolean,
@@ -50,6 +51,11 @@ Schemas.Person = new SimpleSchema({
 });
 
 People.attachSchema(Schemas.Person);
+People.allow({
+    insert : function(userId,doc){return true;},
+    update : function(userId, doc, fieldNames, modifier){return true;},
+    remove : function(userId,doc){return true;}
+});
 
 Schemas.Publisher = new SimpleSchema({
     name: {

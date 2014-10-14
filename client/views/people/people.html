@@ -1,3 +1,48 @@
 <template name="people.list">
     {{{pageTitle 'Nhân vật / Tác giả / Dịch giả'}}}
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <a href="{{pathFor 'people_insert'}}" class="btn btn-info">
+                    <i class="fa fa-plus-circle fa-fw"></i>
+                    Thêm mới
+                </a>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:5%">STT</th>
+                            <th style="width:65%">Tên</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="people_insert">
+    {{{pageTitle 'Thêm mới con người'}}}
+    <div class="row">
+        <div class="col-md-12">
+            {{#autoForm collection="People" id="personForm" type="insert"}}
+            <fieldset>
+                {{> afQuickField name='title' value="Hành giả"}}
+                {{> afQuickField name='name' value="Jetsun Milarepa"}}
+                {{> afQuickField name='summary' rows=6 value="Cuộc đời của Milarepa là một câu chuyện về sự chuyển hóa. Đây là một người đã nhận ra những lỗi lầm, sai sót của mình và đã xoay chuyển cuộc đời mình. Đây là một người đã trở thành một yogi (hành giả) vĩ đại nhất mà thế giới từng nhìn thấy."}}
+                {{> afQuickField name='content' rows=10 value="Tên ngài là Milarepa và ngài là một kẻ sát nhân. Thủa đầu đời của vị hành giả vĩ đại người Tây Tạng này đã bị tổn thương bởi sự bạo lực, thù hằn và sân hận. Nhưng mỗi khi nhắc đến tên ngài, đôi mắt của mọi người Tây Tạng sẽ ướt đẫm những giọt lệ sùng mộ và hỷ lạc."}}
+                <input type="file" class="filestyle" data-input="false">
+                {{> afQuickField name='isAuthor'}}
+                {{> afQuickField name='isTranslator'}}
+                {{> afQuickField name='isBuddha' value=true}}
+            </fieldset>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-save fa-fw"></i>
+                Cập nhật
+            </button>
+            {{/autoForm}}
+        </div>
+    </div>
 </template>
