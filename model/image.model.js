@@ -1,5 +1,5 @@
-ImagesFS = new FS.Collection("images", {
-    stores: [new FS.Store.FileSystem("images", {})],
+PeopleAvatars = new FS.Collection("peopleAvatars", {
+    stores: [new FS.Store.FileSystem("peopleAvatars", {})],
     filter: {
         allow: {
             contentTypes: ['image/*'] //allow only images in this FS.Collection
@@ -7,7 +7,7 @@ ImagesFS = new FS.Collection("images", {
     }
 });
 
-ImagesFS.allow({
+PeopleAvatars.allow({
     insert : function(userId, doc){
         return true;
     },
@@ -20,7 +20,7 @@ ImagesFS.allow({
 });
 
 /*
-ImagesFS.addFilters({
+PeopleAvatars.addFilters({
     allow: {
         contentTypes: ['image*/
 /*']

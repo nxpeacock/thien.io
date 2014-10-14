@@ -1,7 +1,7 @@
 Meteor.publish('images',function(){
-    return ImagesFS.find();
+    return PeopleAvatars.find();
 });
 
 Meteor.publish('image',function(docId){
-    return ImagesFS.find({_id : docId});
+    return PeopleAvatars.find({_id : docId});
 })

@@ -4,12 +4,6 @@ Template.people_insert.rendered = function(){
     })
 };
 
-/*Template.people_insert.events({
-    'change .filestyle' : function(e,t){
-        console.log(e);
-    }
-});*/
-
 AutoForm.hooks({
     personForm: {
         before: {
@@ -17,7 +11,7 @@ AutoForm.hooks({
                 var self = this;
                 var files = t.find('.filestyle').files;
                 for (var i = 0, ln = files.length; i < ln; i++) {
-                    ImagesFS.insert(files[i], function (err, fileObj) {
+                    PeopleAvatars.insert(files[i], function (err, fileObj) {
                         if(!err){
                             _.extend(doc,{'avatar' : fileObj._id});
                             self.result(doc);
@@ -25,6 +19,10 @@ AutoForm.hooks({
                     });
                 }
             }
+        },
+        onSuccess : function(){
+            Notifications.success('Thông báo','Cập nhật thành công!');
+            Router.go('people');
         }
     }
 });
