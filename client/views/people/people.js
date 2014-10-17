@@ -1,3 +1,9 @@
+Template.people_list.helpers({
+    people : function(){
+        return People.find();
+    }
+})
+
 Template.people_insert.rendered = function(){
     $(document).ready(function(){
         $(":file").filestyle({buttonText: "Chọn File..."});

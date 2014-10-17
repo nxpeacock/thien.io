@@ -3,9 +3,9 @@ Publishers = new Mongo.Collection('publishers');
 People = new Mongo.Collection('people');
 Chapters = new Mongo.Collection('chapters');
 
-var Schemas = {};
+//var Schemas = {};
 
-Schemas.Person = new SimpleSchema({
+PersonModel = new SimpleSchema({
     title: {
         type: String,
         label: 'Chức danh',
@@ -50,14 +50,14 @@ Schemas.Person = new SimpleSchema({
     }
 });
 
-People.attachSchema(Schemas.Person);
+People.attachSchema(PersonModel);
 People.allow({
     insert : function(userId,doc){return true;},
     update : function(userId, doc, fieldNames, modifier){return true;},
     remove : function(userId,doc){return true;}
 });
 
-Schemas.Publisher = new SimpleSchema({
+PublisherModel = new SimpleSchema({
     name: {
         type: String,
         label: 'Nhà xuất bản',
@@ -65,9 +65,9 @@ Schemas.Publisher = new SimpleSchema({
     }
 });
 
-Publishers.attachSchema(Schemas.Publisher);
+Publishers.attachSchema(PublisherModel);
 
-Schemas.Chapter = new SimpleSchema({
+ChapterModel = new SimpleSchema({
     title: {
         type: String,
         label: 'Đoạn/Chương',
@@ -93,9 +93,9 @@ Schemas.Chapter = new SimpleSchema({
     }
 });
 
-Chapters.attachSchema(Schemas.Chapter);
+Chapters.attachSchema(ChapterModel);
 
-Schemas.Book = new SimpleSchema({
+BookModel = new SimpleSchema({
     title: {
         type: String,
         label: 'Tựa đề',
@@ -113,19 +113,19 @@ Schemas.Book = new SimpleSchema({
         optional: true
     },
     publisher: {
-        type: Schemas.Publisher,
+        type: PublisherModel,
         optional: true
     },
     authors: {
-        type: [Schemas.Person],
+        type: [PersonModel],
         optional: true
     },
     translators: {
-        type: [Schemas.Person],
+        type: [PersonModel],
         optional: true
     },
     chapters :{
-        type : [Schemas.Chapter],
-        minCount : 1
+        type : [ChapterModel],
+        optional : true
     }
 });

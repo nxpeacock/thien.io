@@ -1,4 +1,4 @@
-<template name="people.list">
+<template name="people_list">
     {{{pageTitle 'Nhân vật / Tác giả / Dịch giả'}}}
     <div class="row">
         <div class="col-md-12">
@@ -17,6 +17,15 @@
                             <th></th>
                         </tr>
                     </thead>
+                    <tbody>
+                        {{#each people}}
+                            <tr>
+                                <td>1</td>
+                                <td>{{title}} {{name}}</td>
+                                <td></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
                 </table>
             </div>
         </div>

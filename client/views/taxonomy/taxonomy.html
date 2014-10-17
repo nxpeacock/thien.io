@@ -1,0 +1,50 @@
+<template name="taxonomies_list">
+    {{{pageTitle 'Taxonomies'}}}
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <a href="{{pathFor 'taxonomies_insert'}}" class="btn btn-primary">
+                    <i class="fa fa-plus-circle fa-fw"></i>
+                    Thêm mới
+                </a>
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width:5%"></th>
+                            <th style="width:35%">Tên</th>
+                            <th style="width:30%">Slug</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each items}}
+                            <tr>
+                                <td>{{NoN}}</td>
+                                <td>{{name}}</td>
+                                <td>{{slug}}</td>
+                                <td>
+                                    <a href="{{pathFor 'taxonomies_update'}}" class="btn btn-warning btn-sm">
+                                        <i class="fa fa-edit fa-fw"></i>
+                                        Sửa
+                                    </a>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="taxonomies_insert">
+    {{{pageTitle 'Thêm mới Taxonomy'}}}
+    {{> quickForm collection="Taxonomies" id="taxonomiesForm" type="insert"}}
+</template>
+
+<template name="taxonomies_update">
+    {{{pageTitle 'Sửa Taxonomy'}}}
+    {{> quickForm collection="Taxonomies" id="taxonomiesForm" type="update" doc=taxonomy}}
+</template>

@@ -1,10 +1,11 @@
 PeopleController = ApplicationController.extend({
-    template: 'people.list',
+    template: 'people_list',
     onBeforeAction: function () {
         document.title = 'THIEN.IO - Nhân vật / Tác giả / Dịch giả';
     },
-    onWait : function(){
+    waitOn : function(){
         Meteor.subscribe('people');
+        //console.log("Meteor.subscribe('people');");
     }
 });
 
