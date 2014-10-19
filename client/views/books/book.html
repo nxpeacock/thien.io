@@ -1,0 +1,80 @@
+<template name="books_list">
+    {{{pageTitle 'Sách / Truyện / Kinh văn'}}}
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <a href="{{pathFor 'books_insert'}}" class="btn btn-primary">
+                    <i class="fa fa-plus-circle fa-fw"></i> Thêm mới
+                </a>
+            </p>
+        </div>
+    </div>
+</template>
+<template name="books_insert">
+    {{{pageTitle 'Thêm mới Sách / Truyện / Kinh văn'}}}
+    <!--{{> quickForm collection="bookPages" id="bookForm" type="insert"}}-->
+    {{#autoForm collection="bookPages" id="bookForm" type="insert"}}
+    <fieldset>
+        <div class="form-group">
+            <label class="control-label" for="bookTypes">{{afFieldLabelText name="types"}}</label>
+            {{> afFieldInput name='types' type="hidden"}}
+            <select id="bookTypes" placeholder="Chọn thể loại..." name="types[]" multiple>
+                {{#each bookTypes}}
+                <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="authors">{{afFieldLabelText name="authors"}}</label>
+            {{> afFieldInput name='authors' type="hidden"}}
+            <select id="authors" placeholder="Chọn tác giả..." name="authors[]" multiple>
+                {{#each people}}
+                <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="translators">{{afFieldLabelText name="translators"}}</label>
+            {{> afFieldInput name='translators' type="hidden"}}
+            <select id="translators" placeholder="Chọn dịch giả..." name="translators[]" multiple>
+                {{#each people}}
+                <option value="{{_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        {{> afQuickField name='isBook'}}
+        <div class="form-group">
+            <label class="control-label" for="isChapterOfBook">{{afFieldLabelText name="isChapterOfBook"}}</label>
+            {{> afFieldInput name='isChapterOfBook' type="hidden"}}
+            <select id="isChapterOfBook" placeholder="Chọn 1 cuốn sách..." name="isChapterOfBook" multiple>
+                {{#each booksList}}
+                <option value="{{_id}}">{{title}}</option>
+                {{/each}}
+            </select>
+        </div>
+        {{> afQuickField name='title'}}
+
+        <div class="form-group">
+            <label for="summary" class="control-label">{{afFieldLabelText name="summary"}}</label>
+            {{> afFieldInput name='summary' type="hidden"}}
+            <div id="summary" class="summernote"></div>
+        </div>
+        <div class="form-group">
+            <label for="coverPicture" class="control-label">{{afFieldLabelText name="coverPicture"}}</label>
+            {{> afFieldInput name='coverPicture' type="hidden"}}
+            <input id="coverPicture" type="file" class="filestyle" data-input="false">
+        </div>
+        <div class="form-group">
+            <label for="content" class="control-label">{{afFieldLabelText name="content"}}</label>
+            {{> afFieldInput name='content' type="hidden"}}
+            <div id="content" class="summernote"></div>
+        </div>
+        {{> afFieldInput name='updatedAt' type="hidden"}}
+        <!--{{> afFieldInput name='chapters' type="hidden" value="[]"}}-->
+    </fieldset>
+    <button id="btnSubmit" type="submit" class="btn btn-primary">
+        <i class="fa fa-save fa-fw"></i>
+        Lưu lại
+    </button>
+    {{/autoForm}}
+</template>
