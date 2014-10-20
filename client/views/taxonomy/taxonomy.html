@@ -8,30 +8,31 @@
                     Thêm mới
                 </a>
             </p>
+
             <div class="table-responsive">
                 <table class="table table-bordered table-hover">
                     <thead>
-                        <tr>
-                            <th style="width:5%"></th>
-                            <th style="width:35%">Tên</th>
-                            <th style="width:30%">Slug</th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th style="width:5%"></th>
+                        <th style="width:35%">Tên</th>
+                        <th style="width:30%">Slug</th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {{#each items}}
-                            <tr>
-                                <td>{{NoN}}</td>
-                                <td>{{name}}</td>
-                                <td>{{slug}}</td>
-                                <td>
-                                    <a href="{{pathFor 'taxonomies_update'}}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit fa-fw"></i>
-                                        Sửa
-                                    </a>
-                                </td>
-                            </tr>
-                        {{/each}}
+                    {{#each items}}
+                    <tr>
+                        <td>{{NoN}}</td>
+                        <td>{{name}}</td>
+                        <td>{{slug}}</td>
+                        <td>
+                            <a href="{{pathFor 'taxonomies_update'}}" class="btn btn-warning btn-sm">
+                                <i class="fa fa-edit fa-fw"></i>
+                                Sửa
+                            </a>
+                        </td>
+                    </tr>
+                    {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -47,4 +48,21 @@
 <template name="taxonomies_update">
     {{{pageTitle 'Sửa Taxonomy'}}}
     {{> quickForm collection="Taxonomies" id="taxonomiesForm" type="update" doc=taxonomy}}
+</template>
+
+<template name="taxonomies_termForm">
+    {{#autoForm schema=modelOfTerm id="termForm" type="method" meteormethod="updateTerms"}}
+    <fieldset>
+        <legend>Cập nhật Terms</legend>
+        {{> afQuickField name="_id"}}
+        {{> afQuickField name="name"}}
+        {{> afQuickField name="count"}}
+        <div>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save fa-fw"></i>
+                Lưu lại</button>
+            <button type="reset" class="btn btn-default">
+                Làm lại</button>
+        </div>
+    </fieldset>
+    {{/autoForm}}
 </template>

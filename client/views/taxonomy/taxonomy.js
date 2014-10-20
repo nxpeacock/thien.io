@@ -12,4 +12,10 @@ Template.taxonomies_update.helpers({
     taxonomy : function(){
         return Taxonomies.findOne({_id : Router.current().params._id});
     }
+});
+
+Template.taxonomies_termForm.helpers({
+    modelOfTerm : function(){
+        return TermModel;
+    }
 })

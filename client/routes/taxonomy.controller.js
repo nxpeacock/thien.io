@@ -47,7 +47,7 @@ AutoForm.hooks({
         before : {
             insert : function(doc,template){
                 if(_.isUndefined(doc.slug) || _.isEmpty(doc.slug)){
-                    _.extend(doc,{slug : toConstantCode(modifier.$set.name)});
+                    _.extend(doc,{slug : toConstantCode(doc.title)});
                 }
                 _.each(doc.terms,function(t){
                     if(_.isUndefined(t._id) || _.isEmpty(t._id)){

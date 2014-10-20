@@ -1,6 +1,14 @@
+Template.books_list.helpers({
+    booksList : function(){
+        var i=0;
+        var books = bookPages.find({},{fields : {summary : 0}});
+        return books;
+    }
+})
+
 Template.books_insert.helpers({
     bookTypes: function () {
-        return Taxonomies.findOne({slug: 'KINHSACHTRUYEN'}, {fields: {terms: 1}}).terms;
+        return Taxonomies.findOne({slug: 'THELOAI'}, {fields: {terms: 1}}).terms;
     },
     people: function () {
         return Taxonomies.findOne({slug: 'TACGIADICHGIA'}, {fields: {terms: 1}}).terms;
@@ -10,8 +18,11 @@ Template.books_insert.helpers({
         console.log(books.count() === 0)
         if(books.count() === 0){
             books = [];
+            Session.set('booksList', books);
+        }else{
+            Session.set('booksList', books.fetch());
         }
-        Session.set('booksList', books.fetch());
+
         return Session.get('booksList');
     }
 });
@@ -60,5 +71,17 @@ Template.books_insert.rendered = function () {
 };
 
 Template.books_insert.events({
-
+    'click #btnAddMoreTypes' : function(e){
+        e.preventDefault();
+        var html = Blaze.toHTML(Template.taxonomies_termForm);
+        var dlg = new BootstrapDialog({
+            title: '',
+            nl2br: false,
+            cssClass: 'modal_add_new_source',
+            closable: true,
+            message : html
+        });
+        dlg.realize();
+        dlg.open();
+    }
 })

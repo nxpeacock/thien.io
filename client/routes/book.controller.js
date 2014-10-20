@@ -2,6 +2,9 @@ BookController = ApplicationController.extend({
     onBeforeAction: function () {
         document.title = 'THIEN.IO - Sách / Truyện / Kinh văn'
     },
+    waitOn : function(){
+        return [Meteor.subscribe('onlyBooksList'),Meteor.subscribe('taxonomies'),Meteor.subscribe('booksCover')]
+    },
     template: 'books_list'
 });
 
@@ -36,8 +39,8 @@ AutoForm.hooks({
                     if (!_.isUndefined(types)) _.extend(doc, {'types': types.split(',')});
                     if (!_.isUndefined(authors)) _.extend(doc, {'authors': authors.split(',')});
                     if (!_.isUndefined(translators)) _.extend(doc, {'translators': translators.split(',')});
-                    if (!_.isUndefined(summary)) _.extend(doc, {'summary': summary});
-                    if (!_.isUndefined(content)) _.extend(doc, {'content': content});
+                    if (!_.isUndefined(summary)) _.extend(doc, {'summary': JSON.stringify(summary)});
+                    if (!_.isUndefined(content)) _.extend(doc, {'content': JSON.stringify(content)});
                     //_.extend(doc, {'types': types.split(','), 'authors': authors.split(','), 'translators': translators.split(',')});
                     var self = this;
                     var files = t.find('.filestyle').files;
@@ -50,8 +53,9 @@ AutoForm.hooks({
                                 }
                             });
                         }
+                    }else{
+                        self.result(doc);
                     }
-                    self.result(doc);
 
                 } catch (e) {
                     console.log(e)

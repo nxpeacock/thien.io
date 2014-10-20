@@ -6,7 +6,6 @@
 meteor-platform
 iron:router
 mizzao:bootstrap-3
-linto:fontawesome
 jquery
 accounts-base
 accounts-password
@@ -21,4 +20,11 @@ cfs:filesystem
 cfs:gridfs
 cfs:ui
 cfs:ejson-file
+chhib:selectize-bootstrap-3
+hckrs:summernote
+cfs:graphicsmagick
+dburles:collection-helpers
+reywood:publish-composite
+cfs:file
+nxcong:bootstrap3-dialog
 

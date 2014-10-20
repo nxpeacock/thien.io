@@ -7,6 +7,31 @@
                     <i class="fa fa-plus-circle fa-fw"></i> Thêm mới
                 </a>
             </p>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width:50px"></th>
+                                    <th style="width:35%">Tựa đề</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each booksList}}
+                                    <tr>
+                                        <td><img src="{{getBookCover.url store='BooksCover_thumbs'}}" alt="{{getBookCover.name}}"/></td>
+                                        <td style="vertical-align: middle">{{title}}</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -18,20 +43,38 @@
         <div class="form-group">
             <label class="control-label" for="bookTypes">{{afFieldLabelText name="types"}}</label>
             {{> afFieldInput name='types' type="hidden"}}
-            <select id="bookTypes" placeholder="Chọn thể loại..." name="types[]" multiple>
-                {{#each bookTypes}}
-                <option value="{{_id}}">{{name}}</option>
-                {{/each}}
-            </select>
+            <div class="row">
+                <div class="col-md-11">
+                    <select id="bookTypes" placeholder="Chọn thể loại..." name="types[]" multiple>
+                        {{#each bookTypes}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button id="btnAddMoreTypes" class="btn btn-primary">
+                        <i class="fa fa-plus-circle fa-fw"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="authors">{{afFieldLabelText name="authors"}}</label>
             {{> afFieldInput name='authors' type="hidden"}}
-            <select id="authors" placeholder="Chọn tác giả..." name="authors[]" multiple>
-                {{#each people}}
-                <option value="{{_id}}">{{name}}</option>
-                {{/each}}
-            </select>
+            <div class="row">
+                <div class="col-md-11">
+                    <select id="authors" placeholder="Chọn tác giả..." name="authors[]" multiple>
+                        {{#each people}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button id="btnAddMoreAuthors" class="btn btn-primary">
+                        <i class="fa fa-plus-circle fa-fw"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="translators">{{afFieldLabelText name="translators"}}</label>
