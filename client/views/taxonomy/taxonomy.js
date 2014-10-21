@@ -18,4 +18,30 @@ Template.taxonomies_termForm.helpers({
     modelOfTerm : function(){
         return TermModel;
     }
-})
+});
+
+/*Template.taxonomies_termForm.created = function(){
+    $(document).ready(function(){
+        setTimeout(function(){
+            console.log('aaa')
+            var btnReset = $('#btnReset');
+            btnReset.click(function(e){
+                console.log(e)
+            })
+        },100)
+    })
+};*/
+
+/*
+Template.taxonomies_termForm.rendered = function(){
+    $(document).ready(function(){
+        setTimeout(function(){
+            console.log('aaa')
+            var btnReset = $('#btnReset');
+            btnReset.click(function(e){
+                console.log(e)
+            })
+        },100)
+    })
+};
+*/

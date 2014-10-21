@@ -15,7 +15,7 @@ Template.books_insert.helpers({
     },
     booksList: function () {
         var books = bookPages.find({},{fields: {summary: 0}});
-        console.log(books.count() === 0)
+        //console.log(books.count() === 0)
         if(books.count() === 0){
             books = [];
             Session.set('booksList', books);
@@ -75,13 +75,21 @@ Template.books_insert.events({
         e.preventDefault();
         var html = Blaze.toHTML(Template.taxonomies_termForm);
         var dlg = new BootstrapDialog({
-            title: '',
+            title: 'Cập nhật Tác giả / Dịch giả',
             nl2br: false,
             cssClass: 'modal_add_new_source',
             closable: true,
-            message : html
+            message : html,
+            buttons: [{
+                id: 'btnSubmit',
+                label: 'Lưu lại'
+            }]
         });
         dlg.realize();
         dlg.open();
+        var btnSubmit = dlg.getButton('btnSubmit');
+        btnSubmit.click(function(ev){
+            console.log($('#txtTerm').val());
+        })
     }
 })
