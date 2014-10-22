@@ -55,6 +55,13 @@
         <div class="col-md-12">
             <form role="form">
                 <div class="form-group">
+                    <select class="form-control" name="taxonomyId" id="taxonomyId">
+                        {{#each taxonomies}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
                     <input type="text" class="form-control" id="txtId" placeholder="ID">
                 </div>
                 <div class="form-group">

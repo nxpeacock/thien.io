@@ -1,7 +1,7 @@
 Template.books_list.helpers({
-    booksList : function(){
-        var i=0;
-        var books = bookPages.find({},{fields : {summary : 0}});
+    booksList: function () {
+        var i = 0;
+        var books = bookPages.find({}, {fields: {summary: 0}});
         return books;
     }
 })
@@ -14,12 +14,12 @@ Template.books_insert.helpers({
         return Taxonomies.findOne({slug: 'TACGIADICHGIA'}, {fields: {terms: 1}}).terms;
     },
     booksList: function () {
-        var books = bookPages.find({},{fields: {summary: 0}});
+        var books = bookPages.find({}, {fields: {summary: 0}});
         //console.log(books.count() === 0)
-        if(books.count() === 0){
+        if (books.count() === 0) {
             books = [];
             Session.set('booksList', books);
-        }else{
+        } else {
             Session.set('booksList', books.fetch());
         }
 
@@ -54,7 +54,7 @@ Template.books_insert.rendered = function () {
             translators.on('change', function (e) {
                 $('[data-schema-key="translators"]').val(e);
             });
-            $isChapterOfBook[0].selectize.on('change',function(e){
+            $isChapterOfBook[0].selectize.on('change', function (e) {
                 $('[data-schema-key="isChapterOfBook"]').val(e);
             })
             $(":file").filestyle({buttonText: "Chọn ảnh..."});
@@ -71,25 +71,56 @@ Template.books_insert.rendered = function () {
 };
 
 Template.books_insert.events({
-    'click #btnAddMoreTypes' : function(e){
+    'click #btnAddMoreTypes': function (e) {
         e.preventDefault();
-        var html = Blaze.toHTML(Template.taxonomies_termForm);
+        var taxonomies = Taxonomies.find({}, {fields: {name: 1}}).fetch();
+        var html = Blaze.toHTMLWithData(Template.taxonomies_termForm, {taxonomies: taxonomies});
         var dlg = new BootstrapDialog({
             title: 'Cập nhật Tác giả / Dịch giả',
             nl2br: false,
             cssClass: 'modal_add_new_source',
             closable: true,
-            message : html,
-            buttons: [{
-                id: 'btnSubmit',
-                label: 'Lưu lại'
-            }]
+            message: html,
+            buttons: [
+                {
+                    id: 'btnSubmit',
+                    label: 'Lưu lại'
+                }
+            ]
         });
         dlg.realize();
         dlg.open();
         var btnSubmit = dlg.getButton('btnSubmit');
-        btnSubmit.click(function(ev){
-            console.log($('#txtTerm').val());
+        btnSubmit.click(function (ev) {
+            var taxonomyId = $('#taxonomyId').val();
+            var termModel = {
+                _id: $('#txtId').val(),
+                name: $('#txtTerm').val()
+            };
+            Meteor.call('insertTerm', {TaxonomyId: taxonomyId, TermModel: termModel}, function (e) {
+                if (e) dlg.close();
+            })
         })
+    }
+});
+
+Template.chaptersOfBook.helpers({
+    book: function () {
+        var bookId = Router.current().params._id;
+        var bookAndPages = bookPages.find({}, {sort: {updatedAt: -1}}).fetch();
+        var book = _.findWhere(bookAndPages, {'_id': bookId});
+        var pages = _.where(bookAndPages, {isChapterOfBook : bookId});
+        var sz = _.size(pages);
+        _.each(pages,function(p){
+            return _.extend(p,{orderRange : _.range(sz,-sz,-1)});
+        });
+
+        console.log(pages)
+
+        if (!book.chapters) {
+            _.extend(book,{chapters : pages})
+        }
+        //_.each(book.chapters,function(c){console.log(c.title)})
+        return book;
     }
 })

@@ -28,6 +28,22 @@ Router.route('books_insert', {
     path: '/sach-truyen/them'
 });
 
+ChaptersController = ApplicationController.extend({
+    onBeforeAction: function () {
+        document.title = 'THIEN.IO - Chương sách'
+    },
+    waitOn : function(){
+        var bookId = this.params._id;
+        return [Meteor.subscribe('getBookById',bookId),Meteor.subscribe('getPagesOfBook',bookId)]
+    },
+    template : 'chaptersOfBook'
+});
+
+Router.route('chaptersOfBook',{
+    controller : ChaptersController,
+    path : '/sach-truyen/:_id'
+})
+
 AutoForm.hooks({
     bookForm: {
         before: {
@@ -44,7 +60,7 @@ AutoForm.hooks({
                     //_.extend(doc, {'types': types.split(','), 'authors': authors.split(','), 'translators': translators.split(',')});
                     var self = this;
                     var files = t.find('.filestyle').files;
-                    if (!_.isUndefined(files) || files.length > 0) {
+                    if (files.length > 0) {
                         for (var i = 0, ln = files.length; i < ln; i++) {
                             BooksCover.insert(files[i], function (err, fileObj) {
                                 if (!err) {
