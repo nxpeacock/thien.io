@@ -115,12 +115,30 @@ Template.chaptersOfBook.helpers({
             return _.extend(p,{orderRange : _.range(sz,-sz,-1)});
         });
 
-        console.log(pages)
+        //console.log(pages)
 
         if (!book.chapters) {
             _.extend(book,{chapters : pages})
         }
         //_.each(book.chapters,function(c){console.log(c.title)})
         return book;
+    }
+});
+
+Template.chaptersOfBook.events({
+    'click button[id^=btnSave_]' : function(e,t){
+        var title = $(t.find('#titleOfChapter_'+this._id));
+
+        var chapter = {
+            bookId : Router.current().params._id,
+            pageId : this._id,
+            orderNo : $(t.find('#orderNo_'+this._id)).val(),
+            titleOfChapter : (_.isEmpty(title.attr('value'))) ? title.attr('placeholder') : title.attr('value'),
+            isPublish : $(t.find('#isPublish_'+this._id)).is(":checked")
+        };
+
+        Meteor.call('updateChapter',chapter,function(err,rs){
+            console.log(err,rs);
+        })
     }
 })
