@@ -17,7 +17,6 @@ aldeed:autoform
 nxcong:iron-router-active
 cfs:standard-packages
 cfs:filesystem
-cfs:gridfs
 cfs:ui
 cfs:ejson-file
 chhib:selectize-bootstrap-3
@@ -27,4 +26,3 @@ dburles:collection-helpers
 reywood:publish-composite
 cfs:file
 nxcong:bootstrap3-dialog
-

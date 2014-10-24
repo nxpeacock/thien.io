@@ -40,7 +40,7 @@ var initDb = function () {
             })
             console.log('Taxonomies : ' + o);
         }
-        if (bookPages.find().count() === 0) {
+/*        if (bookPages.find().count() === 0) {
             var o = 0;
             _.each(Assets.getText('fixtures/bookPages.json').split('\n'), function (i) {
                 if (!_.isEmpty(i)) {
@@ -61,7 +61,7 @@ var initDb = function () {
                 }
             })
             console.log('Books Cover : ' + o);
-        }
+        }*/
     } catch (ex) {
         console.log(ex)
     }

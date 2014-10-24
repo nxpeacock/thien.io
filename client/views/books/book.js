@@ -149,7 +149,7 @@ Template.chaptersOfBook.helpers({
                 }
             })
         }
-        _.sortBy(book.chapters, 'orderNo');
+        _.extend(book,{chapters : _.sortBy(book.chapters, 'orderNo')});
         return book;
     }
 });
