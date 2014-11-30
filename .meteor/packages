@@ -20,7 +20,7 @@ cfs:filesystem
 cfs:ui
 cfs:ejson-file
 chhib:selectize-bootstrap-3
-hckrs:summernote
+summernote:summernote
 cfs:graphicsmagick
 dburles:collection-helpers
 reywood:publish-composite
